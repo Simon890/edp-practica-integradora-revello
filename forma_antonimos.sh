@@ -1,16 +1,20 @@
 
 #!/bin/bash
-[ $# -lt 1 ] && echo "Debe ingresar el nombre del adjetivo" && exit 1
+while read ADJETIVO
+do
+  #Se agrega la palabra clave "exit" para salir del programa
+  echo $ADJETIVO | grep ^[eE][xX][iI][tT] && exit 0
 
-#Se ponen todas las letras en minúscula
-ADJETIVO=$(echo $1 | tr [:upper:] [:lower:])
+  #Se ponen todas las letras en minúscula
+  ADJETIVO=$(echo $ADJETIVO | tr [:upper:] [:lower:])
 
-if [[ $(echo $ADJETIVO | (grep ^p || grep ^b)) ]]
-then
-PREFIJO="Im"
-else
-PREFIJO="In"
-fi
+  if [[ $(echo $ADJETIVO | (grep ^p || grep ^b)) ]]
+  then
+  PREFIJO="Im"
+  else
+  PREFIJO="In"
+  fi
 
-echo "$PREFIJO$ADJETIVO"
+  echo "$PREFIJO$ADJETIVO"
+done
 exit 0
